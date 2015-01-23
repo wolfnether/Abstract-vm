@@ -2,8 +2,7 @@
 #include <fstream>
 #include "parser/Parser.hpp"
 
-int main(int i, char **arg)
-{
+int main(int i, char **arg) {
     std::istream *in;
     Parser parser;
 
