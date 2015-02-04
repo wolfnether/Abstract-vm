@@ -5,10 +5,12 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_C_FLAGS} -std=c++11")
 
 file(GLOB SOURCE_FILES
-main.cpp,
-operand/IOperandFactory.cpp,
-parser/Parser.cpp,
+operand/eOperandType.cpp
+operand/Operator.cpp
+operand/IOperandFactory.cpp
+parser/Parser.cpp
 parser/Token.cpp
+main.cpp
 )
 
 add_executable(vm ${SOURCE_FILES})

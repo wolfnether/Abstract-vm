@@ -20,8 +20,12 @@ Instruction Token::getInstruction() const {
     return this->instruction;
 }
 
-IOperand &Token::getValue() {
-    return this->value;
+IOperand  const &Token::getValue() const{
+    return *this->value;
+}
+
+void Token::setValue(IOperand const *value){
+    this->value = value;
 }
 
 void Token::setInstruction(Instruction ins) {

@@ -1,10 +1,8 @@
-#ifndef PARSER_HPP
-#define PARSER_HPP
+#pragma once
 
 #include <list>
 #include <istream>
 #include "Token.hpp"
-#include "IOperand.hpp"
 
 class Parser {
 public:
@@ -17,7 +15,5 @@ public:
 private:
     static Token &parseInstruction(std::istream &in);
 
-    static IOperand &parseValue(std::istream &in);
+    static IOperand const *parseValue(std::istream &in);
 };
-
-#endif

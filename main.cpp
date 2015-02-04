@@ -16,8 +16,12 @@ int main(int i, char **arg) {
         }
         in = file;
     }
-
-    parser.parse(*in);
+    try {
+        parser.parse(*in);
+    } catch (const std::exception &e) {
+        std::cout << "Error !!" << std::endl;
+        return -1;
+    }
 
     return 0;
 }

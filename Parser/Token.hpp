@@ -1,5 +1,4 @@
-#ifndef TOPIC_HPP
-#define TOPIC_HPP
+#pragma once
 
 #include "../operand/IOperand.hpp"
 #include "Instruction.hpp"
@@ -14,7 +13,8 @@ public:
 
     Token &operator=(Token const &cpy);
 
-    IOperand &getValue();
+    IOperand const &getValue() const;
+    void setValue(IOperand const *value);
 
     Instruction getInstruction() const;
 
@@ -22,7 +22,6 @@ public:
 
 private:
     Instruction instruction;
-    IOperand value;
-};
+    IOperand const *value;
 
-#endif
+};
