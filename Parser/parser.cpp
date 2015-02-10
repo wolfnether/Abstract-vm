@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Parser.hpp"
 #include "../operand/IOperandFactory.hpp"
+#include "../operand/Operand.hpp"
 
 Parser::Parser() {
 }
@@ -23,8 +24,8 @@ std::list<Token *> &Parser::parse(std::istream &in) {
             continue;
         std::stringstream line;
         line << buf;
-        std::cout << line.tellg() << " " << line.tellp() << std::endl;
-        Parser::parseInstruction(line);
+        Token token = Parser::parseInstruction(line);
+        std::cout << token.getValue().toString() << std::endl;
     }
     return *tokenList;
 }
@@ -49,13 +50,9 @@ IOperand const *Parser::parseValue(std::istream &in) {
     std::string value;
 
     std::getline(in, type, '(');
-    //if (in.eof())
-    //    throw new std::exception();
 
     std::getline(in, value, ')');
-    //if (value.size() == 0)
-    //    throw new std::exception();
-    std::cout << "PARSE_Value |" << type << "| | " << value << "|" << std::endl;
+    std::cout << "PARSE_Value |" << type << "| |" << value << "|" << std::endl;
 
     if(type.compare("int8") == 0)
         return operandFactory.createOperand(eOperandType::Int8 , value);
@@ -69,5 +66,6 @@ IOperand const *Parser::parseValue(std::istream &in) {
         return operandFactory.createOperand(eOperandType::Double , value);
 
     std::cout << "Error !!" << std::endl;
-    throw new std::exception();
+    //throw new std::exception();
+    return new Operand(eOperandType::Int8, 0);
 }

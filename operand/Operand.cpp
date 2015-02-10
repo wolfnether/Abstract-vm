@@ -53,6 +53,6 @@ std::string const &Operand::toString() const {
     std::stringstream ss;
     std::string *str = new std::string();
     ss << this->type << " " << this->getValue();
-    ss >> *str;
+    *str = ss.str();
     return *str;
 }

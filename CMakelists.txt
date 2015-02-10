@@ -6,10 +6,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_C_FLAGS} -std=c++11")
 
 file(GLOB SOURCE_FILES
 operand/eOperandType.cpp
-operand/Operator.cpp
 operand/IOperandFactory.cpp
-parser/Parser.cpp
+operand/Operand.cpp
 parser/Token.cpp
+parser/Parser.cpp
 main.cpp
 )
 

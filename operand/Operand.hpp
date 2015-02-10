@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+#include <limits>
 #include <string>
 #include "eOperandType.hpp"
 #include "IOperand.hpp"
@@ -37,3 +39,11 @@ private:
     eOperandType type;
     double value;
 };
+
+template<typename T, typename V>
+inline void testNumber(T v) {
+    if (v > std::numeric_limits<V>::max())
+        std::cout << "error overflow" << std::endl;
+    if (v < std::numeric_limits<V>::min())
+        std::cout << "error underflow" << std::endl;
+}
