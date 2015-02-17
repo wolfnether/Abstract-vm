@@ -1,5 +1,7 @@
 #include <sstream>
 #include <iostream>
+#include "Parser.hpp"
+#include "../operand/IOperandFactory.hpp"
 
 Parser::Parser() {
 }
