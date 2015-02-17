@@ -9,7 +9,7 @@ Parser::Parser() {
 Parser::~Parser() {
 }
 
-std::list<Token *> &Parser::parse(std::istream &in) throw(SyntaxException,UnknownInstructionExeption) {
+std::list<Token *> &Parser::parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException) {
     std::list<Token *> *tokenList = new std::list<Token *>();
     std::string buf;
 
@@ -30,7 +30,7 @@ std::list<Token *> &Parser::parse(std::istream &in) throw(SyntaxException,Unknow
     return *tokenList;
 }
 
-Token &Parser::parseInstruction(std::istream &in) throw(SyntaxException,UnknownInstructionExeption) {
+Token &Parser::parseInstruction(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException) {
     Token *token = new Token();
     std::string buf;
 
@@ -71,11 +71,11 @@ Token &Parser::parseInstruction(std::istream &in) throw(SyntaxException,UnknownI
     else if (buf.compare("exit") == 0){
         token->setInstruction(Instruction::EXIT);
     } else
-        throw new UnknownInstructionExeption(buf + "isn't an instruction");
+        throw UnknownInstructionExeption(buf + " isn't an instruction");
     return *token;
 }
 
-IOperand const *Parser::parseValue(std::istream &in) throw(SyntaxException) {
+IOperand const *Parser::parseValue(std::istream &in) throw(SyntaxException, UnderflowException, OverflowException) {
     IOperandFactory operandFactory;
     std::string type;
     std::string value;
@@ -96,5 +96,5 @@ IOperand const *Parser::parseValue(std::istream &in) throw(SyntaxException) {
     else if(type.compare("double") == 0)
         return operandFactory.createOperand(eOperandType::Double , value);
 
-    throw new SyntaxException(type + " is an unknown type");
+    throw SyntaxException(type + " is an unknown type");
 }

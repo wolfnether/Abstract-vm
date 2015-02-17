@@ -5,6 +5,8 @@
 #include <string>
 #include "eOperandType.hpp"
 #include "IOperand.hpp"
+#include "../exception/OverflowException.hpp"
+#include "../exception/UnderflowException.hpp"
 
 class Operand : public IOperand {
 public:
@@ -41,9 +43,10 @@ private:
 };
 
 template<typename T, typename V>
-inline void testNumber(T v) {
+inline void testNumber(T v) throw(UnderflowException, OverflowException) {
+    std::string str = std::to_string(v);
     if (v > std::numeric_limits<V>::max())
-        std::cout << "error overflow" << std::endl;
+        throw OverflowException(str + " too high, max is " + std::to_string(std::numeric_limits<V>::max()));
     if (v < std::numeric_limits<V>::min())
-        std::cout << "error underflow" << std::endl;
+        throw UnderflowException(str + " too low, min is " + std::to_string(std::numeric_limits<V>::min()));
 }

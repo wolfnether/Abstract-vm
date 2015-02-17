@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <typeinfo>
 #include "parser/Parser.hpp"
 
 int main(int i, char **arg) {

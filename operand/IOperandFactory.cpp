@@ -1,16 +1,20 @@
 #include <sstream>
 #include <iostream>
 #include <limits>
-
+#include "../exception/SyntaxException.hpp"
+#include "eOperandType.hpp"
+#include "IOperand.hpp"
 #include "IOperandFactory.hpp"
 #include "Operand.hpp"
 
-void checkN(std::string const &value) throw(SyntaxException) {
+void checkZ(std::string const &value) throw(SyntaxException) {
     std::string::const_iterator it = value.begin();
+    if (*it == '-')
+        it++;
     if ('0' <= *it && *it <= '9')
         it++;
     else
-        throw new SyntaxException(value + "isn't a float number");
+        throw SyntaxException(value + " isn't a float number");
     for (; it != value.end(); ++it)
         if (!('0' <= *it && *it <= '9'))
             break;
@@ -19,11 +23,11 @@ void checkN(std::string const &value) throw(SyntaxException) {
     if (*it == '.')
         it++;
     else
-        throw new SyntaxException(value + "isn't a float number");
+        throw SyntaxException(value + " isn't a float number");
     if ('0' <= *it && *it <= '9')
         it++;
     else
-        throw new SyntaxException(value + "isn't a float number");
+        throw SyntaxException(value + " isn't a float number");
     for (; it != value.end(); ++it)
         if (!('0' <= *it && *it <= '9'))
             break;
@@ -31,22 +35,24 @@ void checkN(std::string const &value) throw(SyntaxException) {
         return;
 }
 
-void checkZ(std::string const &value) throw(SyntaxException) {
+void checkN(std::string const &value) throw(SyntaxException) {
     std::string::const_iterator it = value.begin();
+    if (*it == '-')
+        it++;
     if ('0' <= *it && *it <= '9')
         it++;
     else
-        throw new SyntaxException(value + "isn't an integer number");
+        throw SyntaxException(value + " isn't an integer number");
     for (; it != value.end(); ++it)
         if (!('0' <= *it && *it <= '9'))
             break;
     if (*it == '\0')
         return;
     else
-        throw new SyntaxException(value + "isn't an integer number");
+        throw SyntaxException(value + " isn't an integer number");
 }
 
-IOperand const *IOperandFactory::createOperand(eOperandType type, std::string const &value) throw(SyntaxException) {
+IOperand const *IOperandFactory::createOperand(eOperandType type, std::string const &value) throw(SyntaxException, UnderflowException, OverflowException) {
     return (this->*aptr[(int) type])(value);
 }
 
@@ -61,7 +67,7 @@ IOperand const *IOperandFactory::createDouble(std::string const &value) throw(Sy
     return new Operand(eOperandType::Double, v);
 }
 
-IOperand const *IOperandFactory::createFloat(std::string const &value) throw(SyntaxException) {
+IOperand const *IOperandFactory::createFloat(std::string const &value) throw(SyntaxException, UnderflowException, OverflowException) {
     std::stringstream ss;
     int64_t buf2;
     double v;
@@ -74,7 +80,7 @@ IOperand const *IOperandFactory::createFloat(std::string const &value) throw(Syn
     return new Operand(eOperandType::Float, v);
 }
 
-IOperand const *IOperandFactory::createInt32(std::string const &value) throw(SyntaxException) {
+IOperand const *IOperandFactory::createInt32(std::string const &value) throw(SyntaxException, UnderflowException, OverflowException) {
     std::stringstream ss;
     int64_t v;
 
@@ -87,7 +93,7 @@ IOperand const *IOperandFactory::createInt32(std::string const &value) throw(Syn
     return new Operand(eOperandType::Int32, v);
 }
 
-IOperand const *IOperandFactory::createInt16(std::string const &value) throw(SyntaxException) {
+IOperand const *IOperandFactory::createInt16(std::string const &value) throw(SyntaxException, UnderflowException, OverflowException) {
     std::stringstream ss;
     int v;
 
@@ -100,7 +106,7 @@ IOperand const *IOperandFactory::createInt16(std::string const &value) throw(Syn
     return new Operand(eOperandType::Int16, v);
 }
 
-IOperand const *IOperandFactory::createInt8(std::string const &value) throw(SyntaxException) {
+IOperand const *IOperandFactory::createInt8(std::string const &value) throw(SyntaxException, UnderflowException, OverflowException) {
     std::stringstream ss;
     int v;
 
