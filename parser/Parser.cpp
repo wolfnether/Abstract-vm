@@ -1,8 +1,5 @@
 #include <sstream>
 #include <iostream>
-#include "Parser.hpp"
-#include "../operand/IOperandFactory.hpp"
-#include "../operand/Operand.hpp"
 
 Parser::Parser() {
 }
@@ -10,7 +7,7 @@ Parser::Parser() {
 Parser::~Parser() {
 }
 
-std::list<Token *> &Parser::parse(std::istream &in) {
+std::list<Token *> &Parser::parse(std::istream &in) throw(SyntaxException,UnknownInstructionExeption) {
     std::list<Token *> *tokenList = new std::list<Token *>();
     std::string buf;
 
@@ -25,12 +22,13 @@ std::list<Token *> &Parser::parse(std::istream &in) {
         std::stringstream line;
         line << buf;
         Token token = Parser::parseInstruction(line);
-        std::cout << token.getValue().toString() << std::endl;
+        if(token.getInstruction() == Instruction::PUSH || token.getInstruction() == Instruction::ASSERT)
+          std::cout << token.getValue().toString() << std::endl;
     }
     return *tokenList;
 }
 
-Token &Parser::parseInstruction(std::istream &in) {
+Token &Parser::parseInstruction(std::istream &in) throw(SyntaxException,UnknownInstructionExeption) {
     Token *token = new Token();
     std::string buf;
 
@@ -40,11 +38,42 @@ Token &Parser::parseInstruction(std::istream &in) {
         token->setInstruction(Instruction::PUSH);
         token->setValue(Parser::parseValue(in));
     }
-
+    else if (buf.compare("pop") == 0){
+        token->setInstruction(Instruction::POP);
+    }
+    else if (buf.compare("dump") == 0){
+        token->setInstruction(Instruction::DUMP);
+    }
+    else if (buf.compare("assert") == 0){
+        token->setInstruction(Instruction::ASSERT);
+        token->setValue(Parser::parseValue(in));
+    }
+    else if (buf.compare("add") == 0){
+        token->setInstruction(Instruction::ADD);
+    }
+    else if (buf.compare("sub") == 0){
+        token->setInstruction(Instruction::SUB);
+    }
+    else if (buf.compare("mul") == 0){
+        token->setInstruction(Instruction::MUL);
+    }
+    else if (buf.compare("div") == 0){
+        token->setInstruction(Instruction::DIV);
+    }
+    else if (buf.compare("mod") == 0){
+        token->setInstruction(Instruction::MOD);
+    }
+    else if (buf.compare("print") == 0){
+        token->setInstruction(Instruction::PRINT);
+    }
+    else if (buf.compare("exit") == 0){
+        token->setInstruction(Instruction::EXIT);
+    } else
+        throw new UnknownInstructionExeption(buf + "isn't an instruction");
     return *token;
 }
 
-IOperand const *Parser::parseValue(std::istream &in) {
+IOperand const *Parser::parseValue(std::istream &in) throw(SyntaxException) {
     IOperandFactory operandFactory;
     std::string type;
     std::string value;
@@ -65,7 +94,5 @@ IOperand const *Parser::parseValue(std::istream &in) {
     else if(type.compare("double") == 0)
         return operandFactory.createOperand(eOperandType::Double , value);
 
-    std::cout << "Error !!" << std::endl;
-    //throw new std::exception();
-    return new Operand(eOperandType::Int8, 0);
+    throw new SyntaxException(type + " is an unknown type");
 }
