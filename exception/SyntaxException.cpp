@@ -2,7 +2,7 @@
 
 SyntaxException::SyntaxException(std::string const &msg) {
     std::string tmp;
-    tmp = "UnknownInstructionExeption: " + msg;
+    tmp = "SyntaxException: " + msg;
     this->msg = new char[tmp.size() + 1];
     memcpy(this->msg, tmp.c_str(), tmp.size() + 1);
 }

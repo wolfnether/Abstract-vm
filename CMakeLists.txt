@@ -18,6 +18,7 @@ operand/IOperandFactory.cpp
 operand/Operand.cpp
 parser/Token.cpp
 parser/Parser.cpp
+parser/Instruction.cpp
 main.cpp
 )
 

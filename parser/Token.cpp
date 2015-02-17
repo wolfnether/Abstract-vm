@@ -1,3 +1,4 @@
+#include <sstream>
 #include "Token.hpp"
 
 Token::Token() {
@@ -30,4 +31,14 @@ void Token::setValue(IOperand const *value){
 
 void Token::setInstruction(Instruction ins) {
     this->instruction = ins;
+}
+
+std::string &Token::toString() {
+    std::stringstream ss;
+    ss << instruction << " ";
+    if (value != NULL)
+        ss << value->toString();
+
+    std::string *ret = new std::string(ss.str());
+    return *ret;
 }

@@ -20,6 +20,8 @@ public:
 
     void setInstruction(Instruction ins);
 
+    std::string &toString();
+
 private:
     Instruction instruction;
     IOperand const *value;

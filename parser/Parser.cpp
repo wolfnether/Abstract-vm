@@ -9,9 +9,10 @@ Parser::Parser() {
 Parser::~Parser() {
 }
 
-std::list<Token *> &Parser::parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException) {
-    std::list<Token *> *tokenList = new std::list<Token *>();
+std::list<Token> &Parser::parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException, NoExitException) {
+    std::list<Token> *tokenList = new std::list<Token>();
     std::string buf;
+    bool exit = in == std::cin;
 
     while (!in.eof()) {
         std::getline(in, buf);
@@ -23,10 +24,18 @@ std::list<Token *> &Parser::parse(std::istream &in) throw(SyntaxException, Unkno
             continue;
         std::stringstream line;
         line << buf;
-        Token token = Parser::parseInstruction(line);
-        if(token.getInstruction() == Instruction::PUSH || token.getInstruction() == Instruction::ASSERT)
-          std::cout << token.getValue().toString() << std::endl;
+        Token &token = Parser::parseInstruction(line);
+        if (token.getInstruction() == Instruction::EXIT)
+            exit = true;
+        std::string tmp;
+        line >> tmp;
+        if (tmp.size() != 0) {
+            throw SyntaxException("Unexpected charaters : " + tmp);
+        }
+        tokenList->push_back(token);
     }
+    if (!exit)
+        throw NoExitException();
     return *tokenList;
 }
 

@@ -7,6 +7,7 @@
 #include "../exception/UnknownInstructionException.hpp"
 #include "../exception/UnderflowException.hpp"
 #include "../exception/OverflowException.hpp"
+#include "../exception/NoExitException.hpp"
 
 class Parser {
 public:
@@ -14,7 +15,7 @@ public:
 
     ~Parser();
 
-    static std::list<Token *> &parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException);
+    static std::list<Token> &parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException, NoExitException);
 
 private:
     static Token &parseInstruction(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException);

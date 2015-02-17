@@ -18,7 +18,9 @@ int main(int i, char **arg) {
         in = file;
     }
     try {
-        parser.parse(*in);
+        std::list<Token> &tokenList = parser.parse(*in);
+        for (Token &token:tokenList)
+            std::cout << token.toString() << std::endl;
     } catch (const std::exception &e) {
         std::cout << "Error !! : " << e.what() << std::endl;
         return -1;
