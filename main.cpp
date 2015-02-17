@@ -19,7 +19,7 @@ int main(int i, char **arg) {
     try {
         parser.parse(*in);
     } catch (const std::exception &e) {
-        std::cout << "Error !!" << std::endl;
+        std::cout << "Error !! : " << e.what() << std::endl;
         return -1;
     }
 
