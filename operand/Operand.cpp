@@ -1,5 +1,7 @@
 #include <sstream>
 #include "Operand.hpp"
+#include <cinttypes>
+
 
 Operand::Operand(eOperandType type, double value) : type(type), value(value) {
 }

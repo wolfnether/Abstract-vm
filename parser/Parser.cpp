@@ -12,13 +12,13 @@ Parser::~Parser() {
 std::list<Token> &Parser::parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException, NoExitException) {
     std::list<Token> *tokenList = new std::list<Token>();
     std::string buf;
-    bool exit = in == std::cin;
+    bool exit = &in == &std::cin;
 
     while (!in.eof()) {
         std::getline(in, buf);
         std::cout << "PARSE " << buf << std::endl;
 
-        if (buf.compare(";;") == 0 && in == std::cin)
+        if (buf.compare(";;") == 0 && &in == &std::cin)
             break;
         else if (buf.compare("") == 0 || buf[0] == ';')
             continue;

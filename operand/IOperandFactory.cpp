@@ -6,6 +6,7 @@
 #include "IOperand.hpp"
 #include "IOperandFactory.hpp"
 #include "Operand.hpp"
+#include <cinttypes>
 
 void checkZ(std::string const &value) throw(SyntaxException) {
     std::string::const_iterator it = value.begin();
@@ -46,7 +47,7 @@ void checkN(std::string const &value) throw(SyntaxException) {
     for (; it != value.end(); ++it)
         if (!('0' <= *it && *it <= '9'))
             break;
-    if (*it == '\0')
+	if (it == value.end())
         return;
     else
         throw SyntaxException(value + " isn't an integer number");
