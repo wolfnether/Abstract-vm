@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="exception\AssertNoTrue.cpp" />
+    <ClCompile Include="exception\AssertNoTrueException.cpp" />
     <ClCompile Include="exception\DivideByZeroException.cpp" />
     <ClCompile Include="exception\EmptyStackException.cpp" />
     <ClCompile Include="exception\NoExitException.cpp" />
@@ -143,9 +143,10 @@
     <ClCompile Include="parser\Instruction.cpp" />
     <ClCompile Include="parser\Parser.cpp" />
     <ClCompile Include="parser\Token.cpp" />
+    <ClCompile Include="vm\VM.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="exception\AssertNoTrue.hpp" />
+    <ClInclude Include="exception\AssertNoTrueException.h" />
     <ClInclude Include="exception\DivideByZeroException.hpp" />
     <ClInclude Include="exception\EmptyStackException.hpp" />
     <ClInclude Include="exception\NoExitException.hpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="parser\Instruction.hpp" />
     <ClInclude Include="parser\Parser.hpp" />
     <ClInclude Include="parser\Token.hpp" />
+    <ClInclude Include="vm\VM.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,7 +13,7 @@ public:
 
     Token &operator=(Token const &cpy);
 
-    IOperand const &getValue() const;
+    IOperand const *getValue() const;
     void setValue(IOperand const *value);
 
     Instruction getInstruction() const;

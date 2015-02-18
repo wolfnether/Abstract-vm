@@ -15,10 +15,10 @@ public:
 
     ~Parser();
 
-    static std::list<Token> &parse(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException, NoExitException);
+    static std::list<Token> &parse(std::istream &in) throw(SyntaxException, UnknownInstructionException, UnderflowException, OverflowException, NoExitException);
 
 private:
-    static Token &parseInstruction(std::istream &in) throw(SyntaxException, UnknownInstructionExeption, UnderflowException, OverflowException);
+    static Token &parseInstruction(std::istream &in) throw(SyntaxException, UnknownInstructionException, UnderflowException, OverflowException);
 
     static IOperand const *parseValue(std::istream &in) throw(SyntaxException, UnderflowException, OverflowException);
 };

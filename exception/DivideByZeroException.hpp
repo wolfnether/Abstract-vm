@@ -2,10 +2,10 @@
 
 #include <exception>
 
-class DivideByZero : public std::exception {
+class DivideByZeroException : public std::exception {
 public:
-    DivideByZero();
+	DivideByZeroException();
 
-    virtual ~DivideByZero();
+	virtual ~DivideByZeroException();
     virtual const char *what() const throw();
 };

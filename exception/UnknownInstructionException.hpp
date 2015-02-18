@@ -1,13 +1,15 @@
 #pragma once
 
+#include "../parser/Instruction.hpp"
 #include <exception>
 #include <string>
 
-class UnknownInstructionExeption : public std::exception {
+class UnknownInstructionException : public std::exception {
 public:
-    UnknownInstructionExeption(std::string const &msg);
-
-    virtual ~UnknownInstructionExeption();
+    UnknownInstructionException(std::string const &msg);
+	UnknownInstructionException(Instruction type);
+	
+    virtual ~UnknownInstructionException();
     virtual const char *what() const throw();
 
 private:
