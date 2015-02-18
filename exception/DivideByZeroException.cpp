@@ -4,7 +4,7 @@ DivideByZeroException::DivideByZeroException()
 {
 }
 
-const char* DivideByZeroException::what() const
+const char *DivideByZeroException::what() const throw()
 {
 	return "";
 }

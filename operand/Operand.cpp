@@ -1,6 +1,7 @@
 #include <sstream>
 #include "Operand.hpp"
 #include <cinttypes>
+#include <math.h>
 #include "../exception/DivideByZeroException.hpp"
 #include "IOperandFactory.hpp"
 

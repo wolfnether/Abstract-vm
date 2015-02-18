@@ -4,7 +4,7 @@ EmptyStackException::EmptyStackException()
 {
 }
 
-const char* EmptyStackException::what() const
+const char *EmptyStackException::what() const throw()
 {
 	return "EmptyStackException: message comming soon";
 }

@@ -1,9 +1,7 @@
 #include "VM.h"
 #include <iostream>
-#include "../exception/EmptyStackException.hpp"
 #include "../exception/NoExitException.hpp"
 #include "../exception/UnknownInstructionException.hpp"
-#include "../exception/AssertNoTrueException.h"
 #include "../operand/Operand.hpp"
 
 
@@ -16,7 +14,7 @@ VM::~VM()
 {
 }
 
-void VM::run(std::list<Token> tokenList) throw(EmptyStackException, AssertNoTrueException)
+void VM::run(std::list<Token> tokenList) throw(EmptyStackException, AssertNoTrueException, UnderflowException, OverflowException)
 {
 	for (Token& token : tokenList)
 	{

@@ -70,36 +70,36 @@ IOperand const* IOperandFactory::createDouble(std::string const& value) throw(Sy
 	return new Operand(eOperandType::Double, v);
 }
 
-IOperand const* IOperandFactory::createOperand(eOperandType type, double value)
+IOperand const *IOperandFactory::createOperand(eOperandType type, double value) throw(UnderflowException, OverflowException)
 {
 	return (this ->* aptrD[(int)type])(value);
 }
 
-IOperand const* IOperandFactory::createInt8(double value)
+IOperand const *IOperandFactory::createInt8(double value) throw(UnderflowException, OverflowException)
 {
 	testNumber<double, int8_t>(value);
 	return new Operand(eOperandType::Int8, value);
 }
 
-IOperand const* IOperandFactory::createInt16(double value)
+IOperand const *IOperandFactory::createInt16(double value) throw(UnderflowException, OverflowException)
 {
 	testNumber<double, int16_t>(value);
 	return new Operand(eOperandType::Int32, value);
 }
 
-IOperand const* IOperandFactory::createInt32(double value)
+IOperand const *IOperandFactory::createInt32(double value) throw(UnderflowException, OverflowException)
 {
 	testNumber<double, int32_t>(value);
 	return new Operand(eOperandType::Int32, value);
 }
 
-IOperand const* IOperandFactory::createFloat(double value)
+IOperand const *IOperandFactory::createFloat(double value) throw(UnderflowException, OverflowException)
 {
 	testNumber<double, float>(value);
 	return new Operand(eOperandType::Float, value);
 }
 
-IOperand const* IOperandFactory::createDouble(double value)
+IOperand const *IOperandFactory::createDouble(double value) throw()
 {
 	return new Operand(eOperandType::Double, value);
 }
