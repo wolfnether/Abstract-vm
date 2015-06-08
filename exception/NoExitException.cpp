@@ -9,6 +9,6 @@ NoExitException::NoExitException()
 {
 }
 
-NoExitException::~NoExitException()
+NoExitException::~NoExitException() throw()
 {
 }

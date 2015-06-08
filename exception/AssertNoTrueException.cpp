@@ -6,11 +6,11 @@ AssertNoTrueException::AssertNoTrueException()
 }
 
 
-AssertNoTrueException::~AssertNoTrueException()
+AssertNoTrueException::~AssertNoTrueException() throw()
 {
 }
 
 const char *AssertNoTrueException::what() const throw()
 {
-	return "AssertNoTrueException: message comming soon";
+	return "AssertNoTrueException: the assertion is not true";
 }

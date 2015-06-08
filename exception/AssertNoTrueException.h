@@ -6,7 +6,7 @@ class AssertNoTrueException :
 {
 public:
 	AssertNoTrueException();
-	virtual ~AssertNoTrueException();
+	virtual ~AssertNoTrueException() throw();
 	virtual const char *what() const throw();
 };
 

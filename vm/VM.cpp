@@ -18,7 +18,6 @@ void VM::run(std::list<Token> tokenList) throw(EmptyStackException, AssertNoTrue
 {
 	for (Token& token : tokenList)
 	{
-		std::cout << token.toString() << std::endl;
 		IOperand const* operand1;
 		IOperand const* operand2;
 		switch (token.getInstruction())
@@ -106,7 +105,7 @@ void VM::run(std::list<Token> tokenList) throw(EmptyStackException, AssertNoTrue
 				throw AssertNoTrueException();
 			break;
 		default:
-			throw UnknownInstructionException(token.getInstruction());
+			throw UnknownInstructionException();
 		}
 	}
 	throw NoExitException();

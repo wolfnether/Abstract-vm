@@ -6,12 +6,9 @@
 
 class UnknownInstructionException : public std::exception {
 public:
-    UnknownInstructionException(std::string const &msg);
-	UnknownInstructionException(Instruction type);
+    UnknownInstructionException();
 	
-    virtual ~UnknownInstructionException();
+    virtual ~UnknownInstructionException() throw();
     virtual const char *what() const throw();
 
-private:
-    char *msg;
 };

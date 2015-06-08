@@ -3,6 +3,13 @@
 #include "Parser.hpp"
 #include "../operand/IOperandFactory.hpp"
 
+std::string &trim(std::string &s){
+	s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+	s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+	return s;
+}
+
+
 Parser::Parser()
 {
 }
@@ -19,6 +26,7 @@ std::list<Token>& Parser::parse(std::istream& in) throw(SyntaxException, Unknown
 	while (!in.eof())
 	{
 		std::getline(in, buf);
+		trim(buf);
 
 		if (buf.compare(";;") == 0 && &in == &std::cin)
 			break;
@@ -31,7 +39,7 @@ std::list<Token>& Parser::parse(std::istream& in) throw(SyntaxException, Unknown
 		line >> tmp;
 		if (tmp.size() != 0)
 		{
-			throw SyntaxException("Unexpected charaters : " + tmp);
+			throw SyntaxException();
 		}
 		tokenList->push_back(token);
 	}
@@ -44,6 +52,7 @@ Token& Parser::parseInstruction(std::istream& in) throw(SyntaxException, Unknown
 	std::string buf;
 
 	std::getline(in, buf, ' ');
+	trim(buf);
 	if (buf.compare("push") == 0)
 	{
 		token->setInstruction(Instruction::PUSH);
@@ -91,9 +100,10 @@ Token& Parser::parseInstruction(std::istream& in) throw(SyntaxException, Unknown
 		token->setInstruction(Instruction::EXIT);
 	}
 	else
-		throw UnknownInstructionException(buf + " isn't an instruction");
+		throw UnknownInstructionException();
 	return *token;
 }
+
 
 IOperand const* Parser::parseValue(std::istream& in) throw(SyntaxException, UnderflowException, OverflowException)
 {
@@ -103,6 +113,8 @@ IOperand const* Parser::parseValue(std::istream& in) throw(SyntaxException, Unde
 
 	std::getline(in, type, '(');
 	std::getline(in, value, ')');
+	trim(type);
+	trim(value);
 
 	if (type.compare("int8") == 0)
 		return operandFactory.createOperand(eOperandType::Int8, value);
@@ -115,5 +127,5 @@ IOperand const* Parser::parseValue(std::istream& in) throw(SyntaxException, Unde
 	else if (type.compare("double") == 0)
 		return operandFactory.createOperand(eOperandType::Double, value);
 
-	throw SyntaxException(type + " is an unknown type");
+	throw SyntaxException();
 }

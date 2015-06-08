@@ -6,6 +6,6 @@ class DivideByZeroException : public std::exception {
 public:
 	DivideByZeroException();
 
-	virtual ~DivideByZeroException();
+	virtual ~DivideByZeroException() throw();
     virtual const char *what() const throw();
 };

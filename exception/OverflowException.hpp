@@ -5,11 +5,9 @@
 
 class OverflowException : public std::exception {
 public:
-    OverflowException(std::string msg);
+    OverflowException();
 
-    virtual ~OverflowException();
+    virtual ~OverflowException() throw();
     virtual const char *what() const throw();
 
-private:
-    char *msg;
 };

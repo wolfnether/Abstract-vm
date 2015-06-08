@@ -30,10 +30,8 @@ int main(int i, char** arg)
 	catch (const std::exception& e)
 	{
 		std::cout << "Error !! : " << e.what() << std::endl;
-		getchar();
 		return -1;
 	}
 
-	getchar();
 	return 0;
 }

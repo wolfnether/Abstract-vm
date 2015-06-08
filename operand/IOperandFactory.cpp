@@ -16,18 +16,18 @@ void checkZ(std::string const& value) throw(SyntaxException)
 	if ('0' <= *it && *it <= '9')
 		it++;
 	else
-		throw SyntaxException(value + " isn't a float number");
+		throw SyntaxException();
 	for (; it != value.end(); ++it)
 		if (!('0' <= *it && *it <= '9'))
 			break;
 	if (it != value.end() && *it == '.')
 		it++;
 	else
-		throw SyntaxException(value + " isn't a float number");
+		throw SyntaxException();
 	if ('0' <= *it && *it <= '9')
 		it++;
 	else
-		throw SyntaxException(value + " isn't a float number");
+		throw SyntaxException();
 	for (; it != value.end(); ++it)
 		if (!('0' <= *it && *it <= '9'))
 			break;
@@ -43,14 +43,14 @@ void checkN(std::string const& value) throw(SyntaxException)
 	if ('0' <= *it && *it <= '9')
 		it++;
 	else
-		throw SyntaxException(value + " isn't an integer number");
+		throw SyntaxException();
 	for (; it != value.end(); ++it)
 		if (!('0' <= *it && *it <= '9'))
 			break;
 	if (it == value.end())
 		return;
 	else
-		throw SyntaxException(value + " isn't an integer number");
+		throw SyntaxException();
 }
 
 IOperand const* IOperandFactory::createOperand(eOperandType type, std::string const& value) throw(SyntaxException, UnderflowException, OverflowException)

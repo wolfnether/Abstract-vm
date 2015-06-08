@@ -6,9 +6,9 @@ DivideByZeroException::DivideByZeroException()
 
 const char *DivideByZeroException::what() const throw()
 {
-	return "";
+	return "A division by zero is impossible";
 }
 
-DivideByZeroException::~DivideByZeroException()
+DivideByZeroException::~DivideByZeroException() throw()
 {
 }

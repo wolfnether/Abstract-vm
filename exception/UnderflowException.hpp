@@ -5,11 +5,8 @@
 
 class UnderflowException : public std::exception {
 public:
-    UnderflowException(std::string msg);
+    UnderflowException();
 
-    virtual ~UnderflowException();
+    virtual ~UnderflowException() throw();
     virtual const char *what() const throw();
-
-private:
-    char *msg;
 };

@@ -1,19 +1,14 @@
 #include "SyntaxException.hpp"
 
-SyntaxException::SyntaxException(std::string const& msg)
+SyntaxException::SyntaxException()
 {
-	std::string tmp;
-	tmp = "SyntaxException: " + msg;
-	this->msg = new char[tmp.size() + 1];
-	memcpy(this->msg, tmp.c_str(), tmp.size() + 1);
 }
 
-SyntaxException::~SyntaxException()
+SyntaxException::~SyntaxException() throw()
 {
-	delete msg;
 }
 
 const char* SyntaxException::what() const throw()
 {
-	return msg;
+	return "SyntaxException: Please revise your grammar";
 }

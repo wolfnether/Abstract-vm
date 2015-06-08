@@ -6,9 +6,9 @@ EmptyStackException::EmptyStackException()
 
 const char *EmptyStackException::what() const throw()
 {
-	return "EmptyStackException: message comming soon";
+	return "EmptyStackException: the stack is empty try to fill it";
 }
 
-EmptyStackException::~EmptyStackException()
+EmptyStackException::~EmptyStackException() throw()
 {
 }

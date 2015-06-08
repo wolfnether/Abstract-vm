@@ -5,11 +5,8 @@
 
 class SyntaxException : public std::exception {
 public:
-    SyntaxException(std::string const &msg);
+    SyntaxException();
 
-    virtual ~SyntaxException();
+    virtual ~SyntaxException() throw();
     virtual const char *what() const throw();
-
-private:
-    char *msg;
 };
