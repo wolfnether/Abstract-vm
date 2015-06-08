@@ -31,8 +31,10 @@ void VM::run(std::list<Token> tokenList) throw(EmptyStackException, AssertNoTrue
 			stack.pop_front();
 			break;
 		case Instruction::DUMP:
+			std::cout << "=== DUMP ===" << std::endl;
 			for (IOperand const* operand : stack)
 				std::cout << operand->toString() << std::endl;
+			std::cout << "=== END ===" << std::endl;
 			break;
 		case Instruction::PRINT:
 			if (stack.empty())
